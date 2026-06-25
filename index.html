@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membuka Anime Stream...</title>
+    <style>
+        body { background-color: #000; color: #fff; font-family: sans-serif; text-align: center; margin-top: 20%; }
+        a { color: #00FF00; }
+    </style>
+</head>
+<body>
+    <h2 id="status">Sedang membuka aplikasi Anime Stream...</h2>
+    <p id="fallback" style="display: none;">
+        Jika aplikasi tidak terbuka, pastikan kamu sudah menginstal <br><b>Anime Stream by Thyo</b>.
+    </p>
+
+    <script>
+        window.onload = function() {
+            // Mengambil parameter dari URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectTo = urlParams.get('redirectto');
+
+            if (redirectTo) {
+                // Langsung paksa browser membuka Deep Link aplikasi
+                window.location.href = redirectTo;
+                
+                // Jika setelah 2 detik tidak terjadi apa-apa (berarti aplikasi belum diinstal)
+                setTimeout(function() {
+                    document.getElementById("status").innerText = "Aplikasi Tidak Ditemukan!";
+                    document.getElementById("fallback").style.display = "block";
+                }, 2000);
+            } else {
+                document.getElementById("status").innerText = "Tautan tidak valid.";
+            }
+        }
+    </script>
+</body>
+</html>
+
